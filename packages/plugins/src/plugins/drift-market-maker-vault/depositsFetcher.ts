@@ -63,16 +63,16 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
       continue;
 
     const vaultInfo = vaultById.get(depositAccount.vault.toString());
-    if (!vaultInfo) continue;
+    if (!vaultInfo || new BigNumber(vaultInfo.totalShares).isZero()) continue;
 
-    const { name, mint, platformId } = vaultInfo;
+    const { name, mint, platformId, link } = vaultInfo;
 
     const element = elementRegistry.addElementMultiple({
       label: 'Deposit',
       platformId,
       name,
-      // Link can fail for some vaults
-      link: `https://app.drift.trade/vaults/${vaultInfo.pubkey.toString()}`,
+      link:
+        link ?? `https://app.drift.trade/vaults/${vaultInfo.pubkey.toString()}`,
       sourceRefs: [
         {
           name: 'Vault',

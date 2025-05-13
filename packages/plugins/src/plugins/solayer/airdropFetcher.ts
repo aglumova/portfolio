@@ -50,22 +50,48 @@ const executor: AirdropFetcherExecutor = async (owner: string) => {
     });
 
   const claimedAmount = new BigNumber(res.data.claimedAmount);
-  const vestedAmount = new BigNumber(res.data.totalAmount).times(
-    (epoch.epoch - res.data.startEpoch) /
-      (res.data.endEpoch - res.data.startEpoch)
-  );
+  const totalAmount = new BigNumber(res.data.totalAmount);
+  const { startEpoch } = res.data;
+  const { endEpoch } = res.data;
+
+  if (epoch.epoch >= startEpoch && endEpoch >= startEpoch) {
+    const diffAirDropEpoch = endEpoch - startEpoch;
+    const diffCurrentEpoch = epoch.epoch - startEpoch;
+
+    const ratio = diffCurrentEpoch / diffAirDropEpoch;
+
+    if (diffAirDropEpoch > 0 && diffCurrentEpoch > 0) {
+      const availableAmount = totalAmount
+        .times(ratio)
+        .minus(claimedAmount)
+        .decimalPlaces(0, BigNumber.ROUND_DOWN);
+
+      return getAirdropRaw({
+        statics: airdropStatics,
+        items: [
+          {
+            amount: availableAmount.dividedBy(10 ** layerDecimals).toNumber(),
+            isClaimed: false,
+            label: 'LAYER',
+            address: layerMint,
+          },
+          {
+            amount: claimedAmount.dividedBy(10 ** layerDecimals).toNumber(),
+            isClaimed: true,
+            label: 'LAYER',
+            address: layerMint,
+          },
+        ],
+      });
+    }
+  }
+
   return getAirdropRaw({
     statics: airdropStatics,
     items: [
       {
         amount: claimedAmount.dividedBy(10 ** layerDecimals).toNumber(),
         isClaimed: true,
-        label: 'LAYER',
-        address: layerMint,
-      },
-      {
-        amount: vestedAmount.dividedBy(10 ** layerDecimals).toNumber(),
-        isClaimed: false,
         label: 'LAYER',
         address: layerMint,
       },

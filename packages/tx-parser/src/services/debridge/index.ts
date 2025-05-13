@@ -1,18 +1,52 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
-const contract = {
-  name: 'deBridge Vault',
+const platformId = 'debridge';
+
+const transferContract = {
+  name: 'DeBridge',
+  address: 'DEbrdGj3HsRsAzx6uH4MKyREKxVAfBydijLUF3ygsFfh',
+  platformId,
+};
+
+const aidropContract = {
+  name: 'Airdrop',
   address: 'DBrLFG4dco1xNC5Aarbt3KEaKaJ5rBYHwysqZoeqsSFE',
   platformId: 'debridge',
 };
-
-const service: Service = {
-  id: 'debridge-vault',
-  name: 'deBridge Vault',
+const vaultContract = {
+  name: 'Vault',
+  address: 'DeDRoPXNyHRJSagxZBBqs4hLAAM1bGKgxh7cyfuNCBpo',
   platformId: 'debridge',
-  networkId: NetworkId.solana,
-  contracts: [contract],
 };
 
-export const services: Service[] = [service];
+const transferService: ServiceDefinition = {
+  id: `${platformId}-transfer`,
+  name: 'Transfer',
+  platformId,
+  networkId: NetworkId.solana,
+  contracts: [transferContract],
+};
+
+const vaultService: ServiceDefinition = {
+  id: 'debridge-vault',
+  name: 'Vault',
+  platformId: 'debridge',
+  networkId: NetworkId.solana,
+  contracts: [vaultContract],
+};
+
+const airdropService: ServiceDefinition = {
+  id: 'debridge-airdrop',
+  name: 'Airdrop',
+  platformId: 'debridge',
+  networkId: NetworkId.solana,
+  contracts: [aidropContract],
+};
+
+export const services: ServiceDefinition[] = [
+  airdropService,
+  vaultService,
+  transferService,
+];
 export default services;

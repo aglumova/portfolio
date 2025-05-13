@@ -1,65 +1,168 @@
-import { Contract, NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { Contract, NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition, ServicePriority } from '../../ServiceDefinition';
+import { matchAnyInstructionWithPrograms } from '../../utils/parseTransaction/matchAnyInstructionWithPrograms';
 
 const platformId = 'jupiter-exchange';
-
-export const jupiterSwapContract: Contract = {
-  name: 'Jupiter Swap',
+const governancePlatformId = 'jupiter-governance';
+const launchpadPlatformId = 'jupiter-launchpad';
+export const jupiterV6Contract: Contract = {
+  name: 'Swap',
   address: 'JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4',
   platformId,
 };
+const jupiterV5Contract = {
+  name: 'Swap v5',
+  address: 'JUP5pEAZeHdHrLxh5UCwAbpjGwYKKoquCpda2hfP4u8',
+  platformId,
+};
+const jupiterV4Contract = {
+  name: 'Swap v4',
+  address: 'JUP4Fb2cqiRUcaTHdrPC8h2gNsA2ETXiPDD33WcGuJB',
+  platformId,
+};
+const jupiterV3Contract = {
+  name: 'Swap v3',
+  address: 'JUP3c2Uh3WA4Ng34tw6kPd2G4C5BB21Xo36Je1s32Ph',
+  platformId,
+};
+const jupiterV2Contract = {
+  name: 'Swap v2',
+  address: 'JUP2jxvXaqu7NQY1GmNF4m1vodw12LVXYxbFL2uJvfo',
+  platformId,
+};
+const jupiterV1Contract = {
+  name: 'Swap v1',
+  address: 'JUP6i4ozu5ydDCnLiMogSckDPpbtr7BJ4FtzYWkb5Rk',
+  platformId,
+};
+const apeContract: Contract = {
+  name: 'Ape',
+  address: 'JSWX3pKDbj2EdCMu4ei7sPYSpdcwZNyjkDSteoHQ4UH',
+  platformId,
+};
 const jupiterLimitV1Contract: Contract = {
-  name: 'Jupiter Limit v1',
+  name: 'Limit v1',
   address: 'jupoNjAxXgZ4rjzxzPMP4oxduvQsQtZzyknqvzYNrNu',
   platformId,
 };
 const jupiterLimitContract: Contract = {
-  name: 'Jupiter Limit',
+  name: 'Limit',
   address: 'j1o2qRpjcyUwEvwtcfhEQefh773ZgjxcVRry7LDqg5X',
   platformId,
 };
 const jupiterDcaContract: Contract = {
-  name: 'Jupiter DCA',
+  name: 'DCA',
   address: 'DCA265Vj8a9CEuX1eb1LWRnDT7uK6q1xMipnNyatn23M',
   platformId,
 };
 const jupiterDcaVaContract: Contract = {
-  name: 'Jupiter DCA VA',
+  name: 'VA',
   address: 'VALaaymxQh2mNy2trH9jUqHT1mTow76wpTcGmSWSwJe',
   platformId,
 };
 const jupiterLockContract: Contract = {
-  name: 'Jupiter Lock',
+  name: 'Lock',
   address: 'LocpQgucEQHbqNABEYvBvwoxCPsSbG91A1QaQhQQqjn',
   platformId,
 };
 const jupiterPerpsContract: Contract = {
-  name: 'Jupiter Perps',
+  name: 'Perps',
   address: 'PERPHjGBqRHArX4DySjwM6UJHiR3sWAatqfdBS2qQJu',
   platformId,
 };
 const jupiterJupuaryContract: Contract = {
-  name: 'Jupiter Jupuary',
+  name: 'Jupuary',
   address: 'DiS3nNjFVMieMgmiQFm6wgJL7nevk4NrhXKLbtEH1Z2R',
   platformId,
 };
 const jupiterGovernanceContract: Contract = {
-  name: 'Jupiter Governance',
+  name: 'Governance',
   address: 'GovaE4iu227srtG2s3tZzB4RmWBzw8sTwrCLZz7kN7rY',
-  platformId,
+  platformId: governancePlatformId,
 };
 const jupiterVoteContract: Contract = {
-  name: 'Jupiter Vote',
+  name: 'Locker Vote',
   address: 'voTpe3tHQ7AjQHMapgSue2HJFAh2cGsdokqN3XqmVSj',
+  platformId: governancePlatformId,
+};
+const rfqContract: Contract = {
+  name: 'JupiterZ',
+  address: '61DFfeTKM7trxYcPQCM78bJ794ddZprZpAwAnLiwTpYH',
+  platformId,
+};
+const inviteContract: Contract = {
+  name: 'Invite',
+  address: 'inv1tEtSwRMtM44tbvJGNiTxMvDfPVnX9StyqXfDfks',
+  platformId,
+};
+const lfgContract: Contract = {
+  name: 'LFG',
+  address: 'DiSLRwcSFvtwvMWSs7ubBMvYRaYNYupa76ZSuYLe6D7j',
+  platformId: launchpadPlatformId,
+};
+const asrContract: Contract = {
+  name: 'ASR Distributor',
+  address: 'Dis2TfkFnXFkrtvAktEkw37sdb7qwJgY6H7YZJwk51wK',
   platformId,
 };
 
-export const services: Service[] = [
+export const services: ServiceDefinition[] = [
   {
     id: `${platformId}-swap`,
     name: 'Swap',
     platformId,
     networkId: NetworkId.solana,
-    contracts: [jupiterSwapContract],
+    contracts: [jupiterV6Contract],
+    priority: ServicePriority.low,
+  },
+  {
+    id: `${platformId}-swap-v5`,
+    name: 'Swap v5',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterV5Contract],
+  },
+  {
+    id: `${platformId}-swap-v4`,
+    name: 'Swap v4',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterV4Contract],
+  },
+  {
+    id: `${platformId}-swap-v3`,
+    name: 'Swap v3',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterV3Contract],
+  },
+  {
+    id: `${platformId}-swap-v2`,
+    name: 'Swap v2',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterV2Contract],
+  },
+  {
+    id: `${platformId}-swap-v1`,
+    name: 'Swap v1',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterV1Contract],
+  },
+  {
+    id: `${platformId}-ape`,
+    name: 'Ape',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [apeContract, jupiterV6Contract],
+  },
+  {
+    id: `${platformId}-jupiter-z`,
+    name: 'JupiterZ',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [rfqContract],
   },
   {
     id: `${platformId}-limitv1`,
@@ -76,7 +179,14 @@ export const services: Service[] = [
     contracts: [jupiterLimitContract],
   },
   {
-    id: `${platformId}-dca`,
+    id: `${platformId}-dca-swap`,
+    name: 'DCA',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [jupiterDcaContract, jupiterV6Contract],
+  },
+  {
+    id: `${platformId}-dca-deposit`,
     name: 'DCA',
     platformId,
     networkId: NetworkId.solana,
@@ -112,17 +222,35 @@ export const services: Service[] = [
   },
   {
     id: `${platformId}-governance`,
-    name: 'Governance',
-    platformId,
+    name: 'Vote',
+    platformId: governancePlatformId,
     networkId: NetworkId.solana,
-    contracts: [jupiterGovernanceContract],
+    matchTransaction: (tx) =>
+      matchAnyInstructionWithPrograms(tx, [
+        jupiterGovernanceContract.address,
+        jupiterVoteContract.address,
+      ]),
   },
   {
-    id: `${platformId}-vote`,
-    name: 'Vote',
+    id: `${platformId}-invite`,
+    name: 'Invite',
     platformId,
     networkId: NetworkId.solana,
-    contracts: [jupiterVoteContract],
+    contracts: [inviteContract],
+  },
+  {
+    id: `${launchpadPlatformId}-lfg`,
+    name: 'LFG',
+    platformId: launchpadPlatformId,
+    networkId: NetworkId.solana,
+    contracts: [lfgContract],
+  },
+  {
+    id: `${platformId}-asr`,
+    name: 'ASR',
+    platformId: governancePlatformId,
+    networkId: NetworkId.solana,
+    contracts: [asrContract],
   },
 ];
 export default services;

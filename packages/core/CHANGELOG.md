@@ -2,6 +2,97 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.14.204](https://github.com/sonarwatch/portfolio/compare/core-0.14.203...core-0.14.204) (2025-05-13)
+
+
+### Bug Fixes
+
+* **dependencies:** update @metaplex-foundation/umi-serializers-encodings to version 1.2.0 and remove deprecated packages ([f429622](https://github.com/sonarwatch/portfolio/commit/f42962254647f7ffc58048f4e58527e4eeffe3d5))
+
+
+
+## [0.14.203](https://github.com/sonarwatch/portfolio/compare/core-0.14.202...core-0.14.203) (2025-05-13)
+
+
+
+## [0.14.202](https://github.com/sonarwatch/portfolio/compare/core-0.14.201...core-0.14.202) (2025-05-13)
+
+
+### Bug Fixes
+
+* **getUsdValueSum:** change return type from UsdValue to number ([168f9e0](https://github.com/sonarwatch/portfolio/commit/168f9e009051d756ea57554c2d861aa4b3a54905))
+
+
+
+## [0.14.201](https://github.com/sonarwatch/portfolio/compare/core-0.14.200...core-0.14.201) (2025-05-07)
+
+
+
+## [0.14.200](https://github.com/sonarwatch/portfolio/compare/core-0.14.199...core-0.14.200) (2025-05-05)
+
+
+
+## [0.14.199](https://github.com/sonarwatch/portfolio/compare/core-0.14.198...core-0.14.199) (2025-05-02)
+
+
+
+## [0.14.198](https://github.com/sonarwatch/portfolio/compare/core-0.14.197...core-0.14.198) (2025-04-30)
+
+
+### Features
+
+* **lavarage:** add new leverage plugin with pools and positions fetchers ([3398d7c](https://github.com/sonarwatch/portfolio/commit/3398d7cc153889e324f479b9ad46afeecf556bc0))
+
+
+
+## [0.14.197](https://github.com/sonarwatch/portfolio/compare/core-0.14.196...core-0.14.197) (2025-04-28)
+
+
+
+## [0.14.196](https://github.com/sonarwatch/portfolio/compare/core-0.14.195...core-0.14.196) (2025-04-24)
+
+
+
+## [0.14.195](https://github.com/sonarwatch/portfolio/compare/core-0.14.194...core-0.14.195) (2025-04-23)
+
+
+
+## [0.14.194](https://github.com/sonarwatch/portfolio/compare/core-0.14.193...core-0.14.194) (2025-04-23)
+
+
+
+## [0.14.193](https://github.com/sonarwatch/portfolio/compare/core-0.14.192...core-0.14.193) (2025-04-21)
+
+
+
+## [0.14.192](https://github.com/sonarwatch/portfolio/compare/core-0.14.191...core-0.14.192) (2025-04-21)
+
+
+
+## [0.14.191](https://github.com/sonarwatch/portfolio/compare/core-0.14.190...core-0.14.191) (2025-04-19)
+
+
+
+## [0.14.190](https://github.com/sonarwatch/portfolio/compare/core-0.14.189...core-0.14.190) (2025-04-19)
+
+
+
+## [0.14.189](https://github.com/sonarwatch/portfolio/compare/core-0.14.188...core-0.14.189) (2025-04-19)
+
+
+
+## [0.14.188](https://github.com/sonarwatch/portfolio/compare/core-0.14.187...core-0.14.188) (2025-04-18)
+
+
+
+## [0.14.187](https://github.com/sonarwatch/portfolio/compare/core-0.14.186...core-0.14.187) (2025-04-18)
+
+
+
+## [0.14.186](https://github.com/sonarwatch/portfolio/compare/core-0.14.185...core-0.14.186) (2025-04-18)
+
+
+
 ## [0.14.185](https://github.com/sonarwatch/portfolio/compare/core-0.14.184...core-0.14.185) (2025-04-16)
 
 

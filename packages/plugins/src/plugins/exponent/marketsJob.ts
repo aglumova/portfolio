@@ -21,9 +21,6 @@ const executor: JobExecutor = async (cache: Cache) => {
   res.data.data.forEach((market) => {
     const tokenPriceMintAsset = tokenPrices.get(market.vault.mintAsset);
     if (!tokenPriceMintAsset) return;
-    const price = new BigNumber(tokenPriceMintAsset.price)
-      .multipliedBy(market.stats.syPriceInAsset)
-      .toNumber();
 
     tokenPriceSources.push({
       address: market.vault.mintSy,
@@ -31,10 +28,37 @@ const executor: JobExecutor = async (cache: Cache) => {
       id: market.vault.id,
       networkId: NetworkId.solana,
       platformId,
-      price,
+      label: 'Deposit',
+      price: new BigNumber(tokenPriceMintAsset.price)
+        .multipliedBy(market.stats.syPriceInAsset)
+        .toNumber(),
+      underlyings: [
+        {
+          address: market.vault.mintAsset.toString(),
+          amountPerLp: market.stats.syPriceInAsset,
+          decimals: market.vault.decimals,
+          networkId: NetworkId.solana,
+          price: tokenPriceMintAsset.price,
+        },
+      ],
       timestamp: Date.now(),
       weight: 1,
     });
+
+    /* tokenPriceSources.push({
+      address: market.vault.mintYt,
+      decimals: market.vault.decimals,
+      id: market.vault.id,
+      networkId: NetworkId.solana,
+      platformId,
+      label: 'Deposit',
+      price: new BigNumber(tokenPriceMintAsset.price)
+        .multipliedBy(1 - market.stats.ptPriceInAsset)
+        .toNumber(),
+      timestamp: Date.now(),
+      weight: 1,
+      link: 'https://www.exponent.finance/farm',
+    }); */
   });
 
   await Promise.all([

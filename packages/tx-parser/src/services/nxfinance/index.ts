@@ -1,4 +1,5 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 const platformId = 'nxfinance';
 
@@ -8,12 +9,26 @@ const contract = {
   platformId,
 };
 
-const service: Service = {
+const service: ServiceDefinition = {
   id: `${platformId}-lend`,
   name: 'Lend',
   platformId,
   networkId: NetworkId.solana,
   contracts: [contract],
+};
+
+const leverageContract = {
+  name: 'Leverage',
+  address: 'EHBN9YKtMmrZhj8JZqyBQRGqyyeHw5xUB1Q5eAHszuMt',
+  platformId,
+};
+
+const leverageService: ServiceDefinition = {
+  id: `${platformId}-leverage`,
+  name: 'Leverage',
+  platformId,
+  networkId: NetworkId.solana,
+  contracts: [leverageContract],
 };
 
 const stakingContract = {
@@ -22,7 +37,7 @@ const stakingContract = {
   platformId,
 };
 
-const stakingService: Service = {
+const stakingService: ServiceDefinition = {
   id: `${platformId}-staking`,
   name: 'Staking',
   platformId,
@@ -30,5 +45,9 @@ const stakingService: Service = {
   contracts: [stakingContract],
 };
 
-export const services: Service[] = [service, stakingService];
+export const services: ServiceDefinition[] = [
+  service,
+  stakingService,
+  leverageService,
+];
 export default services;

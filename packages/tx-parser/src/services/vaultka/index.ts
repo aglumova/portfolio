@@ -1,5 +1,6 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
-import { jupiterSwapContract } from '../jupiter';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
+import { jupiterV6Contract } from '../jupiter';
 
 const platformId = 'vaultka';
 const lendingV1Contracts = [
@@ -33,14 +34,14 @@ const vaultkaV2Contract = {
   platformId,
 };
 
-const lendingV1Service: Service = {
+const lendingV1Service: ServiceDefinition = {
   id: `${platformId}-lending-v1`,
   name: 'Lending V1',
   platformId,
   networkId: NetworkId.solana,
   contracts: [...lendingV1Contracts],
 };
-const strategyV1Service: Service = {
+const strategyV1Service: ServiceDefinition = {
   id: `${platformId}-stragegy-v1`,
   name: 'Strategy V1',
   platformId,
@@ -61,10 +62,10 @@ const leverageService = {
   name: 'Leverage',
   platformId,
   networkId: NetworkId.solana,
-  contracts: [vaultkaV2Contract, jupiterSwapContract],
+  contracts: [vaultkaV2Contract, jupiterV6Contract],
 };
 
-export const services: Service[] = [
+export const services: ServiceDefinition[] = [
   lendingV1Service,
   strategyV1Service,
   lendingV2Service,

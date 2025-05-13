@@ -1,29 +1,30 @@
-import { Contract, NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { Contract, NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 const platformId = 'meteora';
 
 const meteoraVaultsContract: Contract = {
-  name: `Meteora Vaults`,
+  name: `Vaults`,
   address: '24Uqj9JCLxUeoC3hGfh5W3s9FM9uCHDS2SG3LYwBpyTi',
   platformId,
 };
 const meteoraPoolsContract: Contract = {
-  name: `Meteora Pools`,
+  name: `Pools`,
   address: 'Eo7WjKq67rjJQSZxS6z3YkapzY3eMj6Xy8X5EQVn5UaB',
   platformId,
 };
 const meteoraFarmsContract: Contract = {
-  name: `Meteora Farms`,
+  name: `Farms`,
   address: 'FarmuwXPWXvefWUeqFAa5w6rifLkq5X6E8bimYvrhCB1',
   platformId,
 };
 const meteoraDlmmContract: Contract = {
-  name: `Meteora DLMM`,
+  name: `DLMM`,
   address: 'LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo',
   platformId,
 };
 const meteoraDlmmVaultsContract: Contract = {
-  name: `Meteora DLMM Vaults`,
+  name: `DLMM Vaults`,
   address: 'vaU6kP7iNEGkbmPkLmZfGwiGxd4Mob24QQCie5R9kd2',
   platformId,
 };
@@ -33,7 +34,19 @@ const m3m3Contract: Contract = {
   platformId,
 };
 
-export const services: Service[] = [
+const dammV2Contract: Contract = {
+  name: `AMM V2`,
+  address: 'cpamdpZCGKUy5JxQXB4dcpGPiikHawvSWAd6mEn1sGG',
+  platformId,
+};
+
+export const bondingCurveContract: Contract = {
+  name: `Bonding Curve`,
+  address: 'dbcij3LWUppWqq96dh6gJWwBifmcGfLSB5D4DuSMaqN',
+  platformId,
+};
+
+export const services: ServiceDefinition[] = [
   {
     id: `${platformId}-vaults`,
     name: 'Vaults',
@@ -70,11 +83,25 @@ export const services: Service[] = [
     contracts: [meteoraDlmmVaultsContract],
   },
   {
+    id: `${platformId}-damm-v2`,
+    name: 'DAMM V2',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [dammV2Contract],
+  },
+  {
     id: `${platformId}-m3m3-staking`,
     name: 'Staking',
     platformId,
     networkId: NetworkId.solana,
     contracts: [m3m3Contract],
+  },
+  {
+    id: `${platformId}-bonding-curve`,
+    name: 'Bonding Curve',
+    platformId,
+    networkId: NetworkId.solana,
+    contracts: [bondingCurveContract],
   },
 ];
 

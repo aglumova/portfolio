@@ -13,10 +13,10 @@ import { platformId } from './exchange/constants';
 import { getJupiterPrices } from './helpers';
 import { getMultipleDecimalsAsMap } from '../../utils/solana/getMultipleDecimalsAsMap';
 import { getClientSolana } from '../../utils/clients';
-import { lstsKey, platformId as sanctumPlatformId } from '../sanctum/constants';
 import { usdcSolanaMint } from '../../utils/solana';
 import { TokenResponse } from './types';
 import { jupApiParams } from './constants';
+import { lstsKey, platformId as sanctumPlatformId } from '../sanctum/constants';
 
 const mints = [
   'xLfNTYy76B8Tiix3hA51Jyvc1kMSFV4sPdR7szTZsRu', // xLifinity
@@ -37,22 +37,22 @@ const mints = [
   '8qJSyQprMC57TWKaYEmetUR3UUiTP2M3hXdcvFhkZdmv', // Tether USD (Wormhole from BSC)
   'UPTx1d24aBWuRgwxVnFmX4gNraj3QGFzL3QqBgxtWQG', // UPT
   'STREAMribRwybYpMmSYoCsQUdr6MZNXEqHgm7p1gu9M', // STREAM
+  'SAVEDpx3nFNdzG3ymJfShYnrBuYy7LtQEABZQ3qtTFt', // saveSOL
 ];
 const vsToken = solanaNativeWrappedAddress;
 
 const executor: JobExecutor = async (cache: Cache) => {
-  const sanctumMints = await cache.getItem<string[]>(lstsKey, {
-    prefix: sanctumPlatformId,
-    networkId: NetworkId.solana,
-  });
-  if (sanctumMints) mints.push(...sanctumMints);
   const connection = getClientSolana();
 
-  const [solSources, verifiedTokens] = await Promise.all([
+  const [solSources, verifiedTokens, sanctumMints] = await Promise.all([
     getJupiterPrices([new PublicKey(vsToken)], new PublicKey(usdcSolanaMint)),
     axios.get<TokenResponse[]>(
       `https://tokens.jup.ag/tokens?tags=verified&${jupApiParams ?? ''}`
     ),
+    cache.getItem<string[]>(lstsKey, {
+      prefix: sanctumPlatformId,
+      networkId: NetworkId.solana,
+    }),
   ]);
 
   const solPrice = solSources.get(vsToken);
@@ -60,6 +60,7 @@ const executor: JobExecutor = async (cache: Cache) => {
 
   const mintsPk: Set<PublicKey> = new Set([
     ...mints.map((m) => new PublicKey(m)),
+    ...(sanctumMints || []).map((a) => new PublicKey(a)),
   ]);
 
   const decimalsMap = await getMultipleDecimalsAsMap(connection, [...mintsPk]);

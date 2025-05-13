@@ -163,12 +163,14 @@ npx nx run plugins:run-fetcher wallet-tokens-aptos \"0xaa3fca2b46efb0c9b63e9c92e
 npx nx run plugins:run-fetcher wallet-tokens-aptos aa3fca2b46efb0c9b63e9c92ee31a28b9f22ca52a36967151416706f2ca138c6
 npx nx run plugins:run-fetcher wallet-tokens-ethereum-top \"0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045\"
 npx nx run plugins:run-fetcher wallet-tokens-ethereum-top d8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+npx nx run plugins:run-fetcher wallet-tokens-solana d8dA6BF26964aF9D7eEd9e03E53415D37aA96045
 
 # Run a airdrop fetcher
 npx nx run plugins:run-airdrop-fetcher drift-airdrop-1 DemoSX9F2zXfQLtBr56Yr5he15P7viZWsYJpSDAX3tKG
 
 # Run transactions
 npx nx run tx-parser:run DemoSX9F2zXfQLtBr56Yr5he15P7viZWsYJpSDAX3tKG
+npx nx run tx-parser:run-tx DemoSX9F2zXfQLtBr56Yr5he15P7viZWsYJpSDAX3tKG 4AN8Fc4u2Grr9Fe9oBQxe8JrWz2FGBf93hvnYufjnXSbSqw7Ascvm6oE4VsojB6kfYv9n1xaygwsExxXp7CzDRsB
 ```
 
 ## Build

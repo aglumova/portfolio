@@ -14,11 +14,11 @@ import { Fetcher, FetcherExecutor } from '../../../Fetcher';
 import { Cache } from '../../../Cache';
 import { getLpTag, parseLpTag } from '../helpers';
 import tokenPriceToAssetToken from '../../../utils/misc/tokenPriceToAssetToken';
-import tokenPriceToLiquidity from '../../../utils/misc/tokenPriceToLiquidity';
 import { heliusAssetToAssetCollectible } from '../../../utils/solana/das/heliusAssetToAssetCollectible';
 import { getAssetsByOwnerDas } from '../../../utils/solana/das/getAssetsByOwnerDas';
 import { isHeliusFungibleAsset } from '../../../utils/solana/das/isHeliusFungibleAsset';
 import getSolanaDasEndpoint from '../../../utils/clients/getSolanaDasEndpoint';
+import tokenPriceToAssetTokens from '../../../utils/misc/tokenPriceToAssetTokens';
 
 const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
   const dasEndpoint = getSolanaDasEndpoint();
@@ -37,6 +37,10 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
     fungibleAddresses,
     NetworkId.solana
   );
+  const tokenYields = await cache.getTokenYieldsAsMap(
+    fungibleAddresses,
+    NetworkId.solana
+  );
 
   const nftAssets: PortfolioAssetCollectible[] = [];
   const tokenAssets: PortfolioAssetToken[] = [];
@@ -45,9 +49,10 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
   for (let i = 0; i < items.length; i++) {
     const asset = items[i];
     const isFungible = isHeliusFungibleAsset(asset);
-    const tokenPrice = isFungible ? tokenPrices.get(asset.id) : undefined;
-
     const address = asset.id;
+    const tokenPrice = isFungible ? tokenPrices.get(address) : undefined;
+    const tokenYield = isFungible ? tokenYields.get(address) : undefined;
+
     const amount = asset.token_info
       ? BigNumber(asset.token_info.balance)
           .div(10 ** asset.token_info.decimals)
@@ -56,16 +61,27 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
 
     // If it's an LP Token
     if (tokenPrice && tokenPrice.platformId !== walletTokensPlatformId) {
-      const liquidity = {
-        ...tokenPriceToLiquidity(
-          asset.id,
-          amount,
-          NetworkId.solana,
-          tokenPrice
-        ),
-        ref: asset.token_info?.associated_token_address,
+      const assets = tokenPriceToAssetTokens(
+        address,
+        amount,
+        NetworkId.solana,
+        tokenPrice
+      );
+
+      const liquidity: PortfolioLiquidity = {
+        assets,
+        assetsValue: getUsdValueSum(assets.map((a) => a.value)),
+        rewardAssets: [],
+        rewardAssetsValue: 0,
+        value: getUsdValueSum(assets.map((a) => a.value)),
+        yields: tokenYield ? [tokenYield.yield] : [],
+        name: tokenPrice.liquidityName,
       };
-      const tag = getLpTag(tokenPrice.platformId, tokenPrice.elementName);
+      const tag = getLpTag(
+        tokenPrice.platformId,
+        tokenPrice.elementName,
+        tokenPrice.label
+      );
       if (!liquiditiesByTag[tag]) {
         liquiditiesByTag[tag] = [];
       }
@@ -78,7 +94,11 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
           address,
           amount,
           NetworkId.solana,
-          tokenPrice
+          tokenPrice,
+          undefined,
+          undefined,
+          undefined,
+          tokenYield
         ),
         ref: asset.token_info?.associated_token_address,
         link: tokenPrice.link,
@@ -118,13 +138,13 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
     });
   }
   for (const [tag, liquidities] of Object.entries(liquiditiesByTag)) {
-    const { platformId, elementName } = parseLpTag(tag);
+    const { platformId, elementName, label } = parseLpTag(tag);
     elements.push({
       type: PortfolioElementType.liquidity,
       networkId: NetworkId.solana,
       platformId,
       name: elementName,
-      label: 'LiquidityPool',
+      label: label ?? 'LiquidityPool',
       value: getUsdValueSum(liquidities.map((a) => a.value)),
       data: {
         liquidities,

@@ -1,4 +1,5 @@
-import { Contract, NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { Contract, NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 const driftVaultsContract: Contract = {
   name: 'Drift Vaults',
@@ -31,7 +32,7 @@ const vectisVaultsContract: Contract = {
   platformId: 'vectis',
 };
 
-export const services: Service[] = [
+export const services: ServiceDefinition[] = [
   {
     id: `drift-vaults`,
     name: 'Vault',

@@ -1,4 +1,5 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 const contract = {
   name: 'Loopscale',
@@ -6,7 +7,13 @@ const contract = {
   platformId: 'loopscale',
 };
 
-const service: Service = {
+const creditBookContract = {
+  name: 'CreditBook',
+  address: 'abfcSQac2vK2Pa6UAJb37DzarVxF15bDTdphJzAqYYp',
+  platformId: 'loopscale',
+};
+
+const service: ServiceDefinition = {
   id: 'loopscale',
   name: 'Loopscale',
   platformId: 'loopscale',
@@ -14,5 +21,13 @@ const service: Service = {
   contracts: [contract],
 };
 
-export const services: Service[] = [service];
+const creditBookService: ServiceDefinition = {
+  id: 'loopscale-creditbook',
+  name: 'CreditBook',
+  platformId: 'loopscale',
+  networkId: NetworkId.solana,
+  contracts: [creditBookContract],
+};
+
+export const services: ServiceDefinition[] = [service, creditBookService];
 export default services;

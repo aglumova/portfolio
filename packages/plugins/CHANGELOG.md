@@ -2,6 +2,197 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.14.214](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.213...plugins-0.14.214) (2025-05-13)
+
+
+
+## [0.14.213](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.212...plugins-0.14.213) (2025-05-13)
+
+
+
+## [0.14.212](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.211...plugins-0.14.212) (2025-05-13)
+
+
+
+## [0.14.211](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.210...plugins-0.14.211) (2025-05-13)
+
+
+
+## [0.14.210](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.209...plugins-0.14.210) (2025-05-13)
+
+
+
+## [0.14.209](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.208...plugins-0.14.209) (2025-05-13)
+
+
+### Bug Fixes
+
+* **dependencies:** update @metaplex-foundation/umi-serializers-encodings to version 1.2.0 and remove deprecated packages ([f429622](https://github.com/sonarwatch/portfolio/commit/f42962254647f7ffc58048f4e58527e4eeffe3d5))
+
+
+
+## [0.14.208](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.207...plugins-0.14.208) (2025-05-13)
+
+
+### Features
+
+* **fetchers:** refactor fetchers to use defaultFetchers and deprecate old fetchers export ([d846675](https://github.com/sonarwatch/portfolio/commit/d8466757503b1abb216df7eb11c3e445f9dce8f6))
+
+
+
+## [0.14.207](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.206...plugins-0.14.207) (2025-05-13)
+
+
+### Features
+
+* **plugins:** add Solana Umi client and update dependencies ([e590c54](https://github.com/sonarwatch/portfolio/commit/e590c541af2968c0e8ed832be494f59a8a49e98b))
+
+
+
+## [0.14.206](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.205...plugins-0.14.206) (2025-05-12)
+
+
+
+## [0.14.205](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.204...plugins-0.14.205) (2025-05-12)
+
+
+
+## [0.14.204](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.203...plugins-0.14.204) (2025-05-07)
+
+
+
+## [0.14.204](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.203...plugins-0.14.204) (2025-05-07)
+
+
+
+## [0.14.203](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.202...plugins-0.14.203) (2025-05-07)
+
+
+
+## [0.14.202](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.201...plugins-0.14.202) (2025-05-07)
+
+
+
+## [0.14.201](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.200...plugins-0.14.201) (2025-05-06)
+
+
+
+## [0.14.200](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.199...plugins-0.14.200) (2025-05-06)
+
+
+
+## [0.14.199](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.198...plugins-0.14.199) (2025-05-06)
+
+
+
+## [0.14.198](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.197...plugins-0.14.198) (2025-05-06)
+
+
+
+## [0.14.197](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.196...plugins-0.14.197) (2025-05-06)
+
+
+
+## [0.14.196](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.195...plugins-0.14.196) (2025-05-05)
+
+
+### Features
+
+* **cytonic:** add cytonic plugin with fetchers and service definitions ([6a6ec39](https://github.com/sonarwatch/portfolio/commit/6a6ec39811361b994f7c6a935e6472f8570dc244))
+
+
+
+## [0.14.195](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.194...plugins-0.14.195) (2025-05-05)
+
+
+### Features
+
+* **boop:** add initial implementation of staking plugin ([0765d4e](https://github.com/sonarwatch/portfolio/commit/0765d4eb8b2ea1c59fc69a11a68f6a4c33e88b8a))
+
+
+
+## [0.14.194](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.193...plugins-0.14.194) (2025-05-02)
+
+
+### Features
+
+* **services:** add staking and contract definitions for multiple platforms ([143337b](https://github.com/sonarwatch/portfolio/commit/143337befedf80658f8dc64368d8fdfa1c116145))
+
+
+
+## [0.14.193](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.192...plugins-0.14.193) (2025-04-30)
+
+
+### Bug Fixes
+
+* correct next starting index calculation ([2af8811](https://github.com/sonarwatch/portfolio/commit/2af8811b9302bfa0d81736487ac24e13612fc0a6))
+
+
+### Features
+
+* **lavarage:** add new leverage plugin with pools and positions fetchers ([3398d7c](https://github.com/sonarwatch/portfolio/commit/3398d7cc153889e324f479b9ad46afeecf556bc0))
+
+
+
+## [0.14.192](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.191...plugins-0.14.192) (2025-04-29)
+
+
+
+## [0.14.191](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.190...plugins-0.14.191) (2025-04-28)
+
+
+
+## [0.14.190](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.189...plugins-0.14.190) (2025-04-23)
+
+
+
+## [0.14.189](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.188...plugins-0.14.189) (2025-04-23)
+
+
+
+## [0.14.188](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.187...plugins-0.14.188) (2025-04-23)
+
+
+
+## [0.14.187](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.186...plugins-0.14.187) (2025-04-23)
+
+
+
+## [0.14.186](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.185...plugins-0.14.186) (2025-04-21)
+
+
+
+## [0.14.185](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.184...plugins-0.14.185) (2025-04-21)
+
+
+### Bug Fixes
+
+* **tokenPriceToLiquidity:** refine yields handling for optional tokenYield ([9cee5b4](https://github.com/sonarwatch/portfolio/commit/9cee5b43fe696227e0f47c3dfbeb4638f96a83c5))
+* **tokenPriceToLiquidity:** simplify tokenYield type definition ([0b96ec8](https://github.com/sonarwatch/portfolio/commit/0b96ec87509c60539f35866668891dfdf7f0b915))
+
+
+
+## [0.14.184](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.183...plugins-0.14.184) (2025-04-21)
+
+
+
+## [0.14.183](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.182...plugins-0.14.183) (2025-04-19)
+
+
+
+## [0.14.182](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.181...plugins-0.14.182) (2025-04-18)
+
+
+### Features
+
+* **rain:** add stJup job for real-time token price updates ([161e3de](https://github.com/sonarwatch/portfolio/commit/161e3de497ea634bebd2462f1fedbae95e52d8cf))
+
+
+
+## [0.14.181](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.180...plugins-0.14.181) (2025-04-18)
+
+
+
 ## [0.14.180](https://github.com/sonarwatch/portfolio/compare/plugins-0.14.179...plugins-0.14.180) (2025-04-17)
 
 

@@ -2,30 +2,15 @@ import { ParsedTransactionWithMeta } from '@solana/web3.js';
 import {
   AccountChanges,
   BalanceChange,
-  Service,
+  solanaNativeAddress,
   solanaNativeDecimals,
-  solanaNativeWrappedAddress,
   Transaction,
+  TransactionTag,
 } from '@sonarwatch/portfolio-core';
 import { unshift } from './unshift';
-import { sortedServices } from '../services';
-
-const getTransactionService = (
-  txn: ParsedTransactionWithMeta
-): Service | undefined => {
-  const { instructions } = txn.transaction.message;
-
-  const txnContractAddresses = instructions
-    .map((i) => i.programId.toString())
-    .filter((value, index, self) => self.indexOf(value) === index);
-
-  // We keep the first service with all contract addresses in txn
-  return sortedServices.find((service) =>
-    service.contracts?.every((contract) =>
-      txnContractAddresses.includes(contract.address)
-    )
-  );
-};
+import { getTransactionService } from './parseTransaction/getTransactionService';
+import { transactionContainsJitotip } from './parseTransaction/transactionContainsJitotip';
+import { transactionIsSpam } from './parseTransaction/transactionIsSpam';
 
 const getAccountChanges = (txn: ParsedTransactionWithMeta): AccountChanges => {
   const accountChanges: AccountChanges = {
@@ -68,7 +53,7 @@ const getBalanceChanges = (
 
     if (postBalances[ownerIndex] !== preBalances[ownerIndex]) {
       changes.push({
-        address: solanaNativeWrappedAddress,
+        address: solanaNativeAddress,
         preBalance: unshift(preBalances[ownerIndex], solanaNativeDecimals),
         postBalance: unshift(postBalances[ownerIndex], solanaNativeDecimals),
         change: unshift(
@@ -79,35 +64,41 @@ const getBalanceChanges = (
     }
 
     if (preTokenBalances && postTokenBalances) {
-      const preTokenBalance = preTokenBalances.find((b) => b.owner === owner);
-      const postTokenBalance = postTokenBalances.find((b) => b.owner === owner);
+      accountKeys.forEach((accountKey, i) => {
+        const preTokenBalance = preTokenBalances.find(
+          (b) => b.accountIndex === i && b.owner === owner
+        );
+        const postTokenBalance = postTokenBalances.find(
+          (b) => b.accountIndex === i && b.owner === owner
+        );
 
-      if (preTokenBalance || postTokenBalance) {
-        const preBalanceAmount = preTokenBalance
-          ? unshift(
-              preTokenBalance.uiTokenAmount.amount,
-              preTokenBalance.uiTokenAmount.decimals
-            )
-          : 0;
-        const postBalanceAmount = postTokenBalance
-          ? unshift(
-              postTokenBalance.uiTokenAmount.amount,
-              postTokenBalance.uiTokenAmount.decimals
-            )
-          : 0;
-        if (postBalanceAmount !== preBalanceAmount) {
-          const address = postTokenBalance
-            ? postTokenBalance.mint
-            : preTokenBalance?.mint;
-          if (address)
-            changes.push({
-              address,
-              preBalance: preBalanceAmount,
-              postBalance: postBalanceAmount,
-              change: postBalanceAmount - preBalanceAmount,
-            });
+        if (preTokenBalance || postTokenBalance) {
+          const preBalanceAmount = preTokenBalance
+            ? unshift(
+                preTokenBalance.uiTokenAmount.amount,
+                preTokenBalance.uiTokenAmount.decimals
+              )
+            : 0;
+          const postBalanceAmount = postTokenBalance
+            ? unshift(
+                postTokenBalance.uiTokenAmount.amount,
+                postTokenBalance.uiTokenAmount.decimals
+              )
+            : 0;
+          if (postBalanceAmount !== preBalanceAmount) {
+            const address = postTokenBalance
+              ? postTokenBalance.mint
+              : preTokenBalance?.mint;
+            if (address)
+              changes.push({
+                address,
+                preBalance: preBalanceAmount,
+                postBalance: postBalanceAmount,
+                change: postBalanceAmount - preBalanceAmount,
+              });
+          }
         }
-      }
+      });
     }
   }
 
@@ -130,6 +121,14 @@ export const parseTransaction = (
 
   const isSigner = ownerIsSigner(txn, owner);
 
+  const tags: TransactionTag[] = [];
+  if (transactionContainsJitotip(txn)) {
+    tags.push('jitotip');
+  }
+  if (transactionIsSpam(txn, isSigner)) {
+    tags.push('spam');
+  }
+
   return {
     signature: txn.transaction.signatures[0],
     owner,
@@ -138,6 +137,7 @@ export const parseTransaction = (
     balanceChanges: getBalanceChanges(txn, owner),
     accountChanges: getAccountChanges(txn),
     isSigner,
+    tags,
     fees:
       isSigner && txn.meta?.fee
         ? unshift(txn.meta.fee, solanaNativeDecimals)

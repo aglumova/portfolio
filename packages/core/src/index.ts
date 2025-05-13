@@ -11,5 +11,7 @@ export * from './Network';
 export * from './Portfolio';
 export * from './TokenList';
 export * from './TokenPrice';
+export * from './TokenYield';
 export * from './Yield';
 export * from './BorrowLendRate';
+export * from './Transaction';
