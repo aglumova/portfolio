@@ -1,4 +1,5 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 // lookupAddressTable Es56bH1dokFwohpWS8XYSfTXavvSEuyob2FnUYzF6pCL
 const programIds = [
@@ -16,9 +17,11 @@ const programIds = [
   'raTeSq8Ebeb1JR3xRgSz7i2DP35Fyz5zsszkijgnXKm',
   'RaTeUhvvohYGErSb2Sy3RA5EdMv9A9jtiJe8FHTg7uK',
   'rAtewzmMSgn1QGewCM8PHdoW49bbuzrDQi4ftFoTFWo',
+  'ratEoDQr8juEipHZ7kx1Vu7BffJ2t2R27ScJCJHDiSV',
+  'RAtELWRTmTxPtDUue6ihnoXRhLzjbFixvJmH9RwymLo',
 ];
 
-export const services: Service[] = programIds.map((programId, i) => ({
+export const services: ServiceDefinition[] = programIds.map((programId, i) => ({
   id: `ratex-${i}`,
   name: 'RateX',
   platformId: 'ratex',

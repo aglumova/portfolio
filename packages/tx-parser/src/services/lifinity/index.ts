@@ -1,4 +1,5 @@
-import { NetworkId, Service } from '@sonarwatch/portfolio-core';
+import { NetworkId } from '@sonarwatch/portfolio-core';
+import { ServiceDefinition } from '../../ServiceDefinition';
 
 const platformId = 'lifinity';
 const contract = {
@@ -7,7 +8,13 @@ const contract = {
   platformId,
 };
 
-const service: Service = {
+const rewarderContract = {
+  name: 'Rewarder',
+  address: 'LRewdYDnxyP9HXCL6DQYgTaeL9FKb5Pc8Gr4UbVrtnj',
+  platformId,
+};
+
+const service: ServiceDefinition = {
   id: `${platformId}-locker`,
   name: 'Locker',
   platformId,
@@ -15,5 +22,12 @@ const service: Service = {
   contracts: [contract],
 };
 
-export const services: Service[] = [service];
+const rewarderService: ServiceDefinition = {
+  id: `${platformId}-Reward`,
+  name: 'Reward',
+  platformId,
+  networkId: NetworkId.solana,
+  contracts: [rewarderContract],
+};
+export const services: ServiceDefinition[] = [service, rewarderService];
 export default services;

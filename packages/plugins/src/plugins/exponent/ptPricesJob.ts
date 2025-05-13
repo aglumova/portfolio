@@ -29,7 +29,8 @@ const executor: JobExecutor = async (cache: Cache) => {
       timestamp: Date.now(),
       weight: 1,
       elementName: 'Income',
-      label: 'Staked',
+      label: 'Deposit',
+      link: 'https://www.exponent.finance/income',
     };
     /* if (baseTokenPrice) {
       tokenPriceSource.underlyings = [

@@ -67,6 +67,13 @@ export class ElementLeverageBuilder extends ElementBuilder {
     platformId: string,
     tokenPrices: TokenPriceMap
   ): PortfolioElementLeverage | null {
+    if (
+      this.isoPositions.length === 0 &&
+      this.crossPositions.length === 0 &&
+      this.crossCollateralAssets.length === 0
+    )
+      return null;
+
     const isoPositions = this.isoPositions.map((p) => p.get(networkId));
     const isoValue = getUsdValueSum([...isoPositions.map((a) => a.value)]);
     const crossPositions = this.crossPositions.map((p) => p.get(networkId));

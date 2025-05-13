@@ -15,14 +15,14 @@ export function getVotePda(owner: string): PublicKey {
 }
 
 const maxIdsPerRequest = 100;
-const jupPriceApiUrl = 'https://api.jup.ag/price/v2';
+const jupPriceApiUrl = 'https:/lite-api.jup.ag/price/v2';
 
 export async function getJupiterPrices(mints: PublicKey[], vsMint: PublicKey) {
   let res;
   const pricesData = [];
   let subMints;
   let start = 0;
-  let end = maxIdsPerRequest - 1;
+  let end = maxIdsPerRequest;
   const endpoint = `${jupPriceApiUrl}?${jupApiParams ?? ''}`;
 
   do {
@@ -33,7 +33,7 @@ export async function getJupiterPrices(mints: PublicKey[], vsMint: PublicKey) {
         vsToken: vsMint.toString(),
       },
     });
-    start += maxIdsPerRequest;
+    start = end;
     end += maxIdsPerRequest;
     pricesData.push(res.data.data);
   } while (mints.at(start));

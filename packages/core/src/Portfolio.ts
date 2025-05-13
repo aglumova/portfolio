@@ -108,6 +108,7 @@ export type PortfolioAssetTokenData = {
   address: string;
   amount: number;
   price: UsdValue;
+  yield?: Yield;
 };
 
 /**
@@ -169,56 +170,6 @@ export type ProxyInfo = {
   address: string;
 };
 
-/**
- * Represents a smart contract
- */
-export type Contract = {
-  name: string;
-  address: string;
-  platformId: string;
-};
-
-/**
- * Represents a service from a platform
- */
-export type Service = {
-  id: string;
-  name: string;
-  platformId: string;
-  networkId: NetworkIdType;
-  contracts?: Contract[];
-  link?: string;
-  description?: string;
-};
-
-/**
- * Represents a transaction
- */
-export type BalanceChange = {
-  address: string;
-  preBalance: number;
-  postBalance: number;
-  change: number;
-};
-
-export type AccountChanges = {
-  created: string[];
-  updated: string[];
-  closed: string[];
-};
-
-export type Transaction = {
-  signature: string;
-  owner: string;
-  blockTime?: number | null;
-  service?: Service;
-  balanceChanges: BalanceChange[];
-  accountChanges: AccountChanges;
-  isSigner: boolean;
-  fees?: number | null;
-  success: boolean;
-};
-
 export type SourceRefName =
   | 'Pool'
   | 'Farm'
@@ -253,7 +204,6 @@ export type PortfolioElementCommon = {
   name?: string;
   tags?: string[];
   proxyInfo?: ProxyInfo;
-  service?: Service;
 };
 
 /**
@@ -373,6 +323,8 @@ export type IsoLevPosition = {
   tp?: number;
   sl?: number;
   value: UsdValue;
+  ref?: string;
+  sourceRefs?: SourceRef[];
 };
 
 export type CrossLevPosition = Omit<IsoLevPosition, 'collateralValue'>;
@@ -557,17 +509,5 @@ export type FetchersResult = {
   value: UsdValue;
   elements: PortfolioElement[];
   duration: number;
-  tokenInfo?: Partial<Record<NetworkIdType, Record<string, TokenInfo>>>;
-};
-
-/**
- * Represents the result of transactions.
- */
-export type TransactionsResult = {
-  owner: string;
-  account: string;
-  networkId: NetworkIdType;
-  duration: number;
-  transactions: Transaction[];
   tokenInfo?: Partial<Record<NetworkIdType, Record<string, TokenInfo>>>;
 };

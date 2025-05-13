@@ -41,6 +41,7 @@ const executor: FetcherExecutor = async (owner: string, cache: Cache) => {
         month: 'short',
       })} ${maturity.getDate()} ${maturity.getFullYear().toString()}`,
       link: 'https://www.exponent.finance/farm',
+      ref: account.pubkey,
     });
 
     element.addAsset({

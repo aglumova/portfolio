@@ -65,6 +65,10 @@ export const lendingConfigs: Map<string, LendingMarketConfig> = new Map([
           'picobAEvs6w7QEknPce34wAE4gknZA9v5tTonnmHYdX',
           'So11111111111111111111111111111111111111112',
         ],
+        [
+          'LAinEtNLgpmCP9Rvsf5Hn8W6EhNiKLZQti1xfWMLy6X',
+          'So11111111111111111111111111111111111111112',
+        ],
       ],
       leveragePairs: [
         ['6DNSN2BJsaPFdFFc1zP37kkeNe4Usc1Sqkzr9C9vPWcU', usdcSolanaMint],
@@ -75,6 +79,7 @@ export const lendingConfigs: Map<string, LendingMarketConfig> = new Map([
         ['7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs', usdcSolanaMint],
         ['Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', usdcSolanaMint],
         ['3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh', usdcSolanaMint],
+        ['2u1tszSeqZ3qBWF3uNGPFc8TzMk2tdiwknnRMWGWjGWH', usdcSolanaMint],
       ],
     },
   ],
